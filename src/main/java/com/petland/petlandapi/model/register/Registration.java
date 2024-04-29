@@ -16,6 +16,8 @@ public class Registration {
     @Setter(AccessLevel.NONE)
     private UUID id;
     private String name;
+
+    @Embedded
     private Profile profile;
 
     @Embedded
