@@ -1,7 +1,6 @@
 package com.petland.petlandapi.model.animal.usecases;
 
 import com.petland.petlandapi.model.animal.dto.AnimalRequestDTO;
-import com.petland.petlandapi.model.animal.dto.AnimalResponseDTO;
 import com.petland.petlandapi.model.animal.entity.AnimalEntity;
 import com.petland.petlandapi.model.animal.repository.AnimalRepository;
 import org.springframework.stereotype.Service;
@@ -17,7 +16,7 @@ public class AlterAnimalByIdUseCase {
         this.animalRepository = animalRepository;
     }
 
-    public UUID execute(UUID id, AnimalRequestDTO animalRequestDTO){
+    public UUID execute(UUID id, AnimalRequestDTO animalRequestDTO) throws RuntimeException {
         AnimalEntity entity = animalRepository.findById (id).orElseThrow (
                 () -> new RuntimeException ("Animal not found")
         );

@@ -1,6 +1,5 @@
 package com.petland.petlandapi.model.register.usecases;
 
-import com.petland.petlandapi.model.animal.repository.AnimalRepository;
 import com.petland.petlandapi.model.register.repository.RegistrationRepository;
 import org.springframework.stereotype.Service;
 
