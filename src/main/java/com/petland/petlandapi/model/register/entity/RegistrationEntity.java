@@ -1,5 +1,6 @@
-package com.petland.petlandapi.model.register;
+package com.petland.petlandapi.model.register.entity;
 
+import com.petland.petlandapi.model.register.Address;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -9,7 +10,7 @@ import java.util.UUID;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Registration {
+public class RegistrationEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)

@@ -1,15 +1,17 @@
-package com.petland.petlandapi.model.product;
+package com.petland.petlandapi.model.animal.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
+
 @Entity
-@Table(name = "products")
+@Table(name = "animals")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Product {
+public class AnimalEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -18,8 +20,9 @@ public class Product {
 
     private String name;
 
-    private double value;
+    private LocalDateTime bornDate;
 
-    private boolean service;
+    @Enumerated(EnumType.STRING)
+    private Specie specie;
 
 }

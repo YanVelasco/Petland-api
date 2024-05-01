@@ -1,9 +1,9 @@
-package com.petland.petlandapi.model.customer;
+package com.petland.petlandapi.model.customer.entity;
 
 
-import com.petland.petlandapi.model.animal.Animal;
-import com.petland.petlandapi.model.product.Product;
-import com.petland.petlandapi.model.register.Registration;
+import com.petland.petlandapi.model.animal.entity.AnimalEntity;
+import com.petland.petlandapi.model.product.entity.ProductEntity;
+import com.petland.petlandapi.model.register.entity.RegistrationEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -14,7 +14,7 @@ import java.util.UUID;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CustomerService {
+public class CustomerServiceEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -35,13 +35,13 @@ public class CustomerService {
     private boolean emergency;
 
     @ManyToOne
-    private Registration registration;
+    private RegistrationEntity registrationEntity;
 
     @ManyToOne
-    private Product service;
+    private ProductEntity serviceEntity;
 
     @ManyToOne
-    private Animal patient;
+    private AnimalEntity patientEntity;
 
     private double value;
 
