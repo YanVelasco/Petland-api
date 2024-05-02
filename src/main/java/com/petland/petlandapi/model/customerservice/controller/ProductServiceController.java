@@ -1,11 +1,11 @@
-package com.petland.petlandapi.model.customer.controller;
+package com.petland.petlandapi.model.customerservice.controller;
 
-import com.petland.petlandapi.model.customer.dto.CustomerServiceRequireDTO;
-import com.petland.petlandapi.model.customer.dto.CustomerServiceResponseDTO;
-import com.petland.petlandapi.model.customer.usecases.CreateCustomerServiceUseCase;
-import com.petland.petlandapi.model.customer.usecases.DeleteCustomerServiceByIdUseCase;
-import com.petland.petlandapi.model.customer.usecases.ListAllCustomerServiceUseCase;
-import com.petland.petlandapi.model.customer.usecases.UpdateCustomerServiceUseCase;
+import com.petland.petlandapi.model.customerservice.dto.CustomerServiceRequireDTO;
+import com.petland.petlandapi.model.customerservice.dto.CustomerServiceResponseDTO;
+import com.petland.petlandapi.model.customerservice.usecases.CreateCustomerServiceUseCase;
+import com.petland.petlandapi.model.customerservice.usecases.DeleteCustomerServiceByIdUseCase;
+import com.petland.petlandapi.model.customerservice.usecases.ListAllCustomerServiceUseCase;
+import com.petland.petlandapi.model.customerservice.usecases.UpdateCustomerServiceUseCase;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

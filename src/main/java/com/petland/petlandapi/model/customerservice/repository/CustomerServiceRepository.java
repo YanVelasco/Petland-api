@@ -1,6 +1,6 @@
-package com.petland.petlandapi.model.customer.repository;
+package com.petland.petlandapi.model.customerservice.repository;
 
-import com.petland.petlandapi.model.customer.entity.CustomerServiceEntity;
+import com.petland.petlandapi.model.customerservice.entity.CustomerServiceEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.UUID;

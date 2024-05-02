@@ -1,4 +1,4 @@
-package com.petland.petlandapi.model.customer.entity;
+package com.petland.petlandapi.model.customerservice.entity;
 
 
 import com.petland.petlandapi.model.animal.entity.AnimalEntity;

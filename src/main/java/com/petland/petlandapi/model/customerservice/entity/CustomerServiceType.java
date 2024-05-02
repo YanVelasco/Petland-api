@@ -1,4 +1,4 @@
-package com.petland.petlandapi.model.customer.entity;
+package com.petland.petlandapi.model.customerservice.entity;
 
 public enum CustomerServiceType {
     CONSULT,
