@@ -1,95 +1,40 @@
+# Petland API
 
-Documentação da API Petland Animal
-Este documento descreve as funcionalidades da API Petland Animal.
+## Overview
+The Petland API is a Java-based application developed using the Spring Boot framework. It provides a platform for managing pet services, including pet registration, customer services, and product management.
 
-A API fornece funcionalidades para gerenciar animais, incluindo:
+## Technologies
+- Java: The programming language used to develop the application.
+- Spring Boot: A framework that simplifies the setup and development of Spring applications.
+- Maven: A project management and comprehension tool used for managing project builds.
+- JPA/Hibernate: Used for mapping Java objects to database records.
+- PostgreSQL: The database management system used to store the application's data.
 
-Criar novas entradas de animais.
-Obter uma lista de todos os animais registrados.
-Atualizar informações existentes de animais.
-Excluir entradas de animais.
-Modelo de Dados
-A entidade de dados principal que representa um animal é AnimalEntity. Possui as seguintes propriedades:
+## Features
+- **Pet Registration**: Allows for the registration of pets with details such as name, date of birth, and species. Pets are registered with a unique ID for easy identification and management.
+- **Customer Services**: Allows for the registration of customer services, including the type of service, status, description, date and time realized, whether it's an emergency, the associated registration entity, the service entity, and the patient animal entity.
+- **Product Management**: Allows for the management of products available for sale. Each product is registered with a unique ID and can be associated with one or more customer services.
 
-id: Identificador único (UUID) do animal (gerado automaticamente).
-nome: Nome do animal.
-dataDeNascimento: Data de nascimento do animal (LocalDateTime).
-especie: Espécie do animal (enum: GATO, CACHORRO, COBRA).
-Endpoints
-1. Listar todos os animais:
+## Running the Application
+1. Clone the repository to your local machine using the git clone command.
+2. Navigate to the project directory using the cd command.
+3. Run the command `mvn spring-boot:run` to start the application.
+4. The application will be available at http://localhost:8080.
 
-Método: GET
-URI: /animal
-Resposta: Retorna uma lista de objetos AnimalResponseDTO contendo detalhes de todos os animais registrados.
-2. Criar um novo animal:
+## API Endpoints
+- **/animal**: Endpoint for managing pet registration. Supports GET, POST, PUT, and DELETE operations.
+- **/customerservice**: Endpoint for managing customer services. Supports GET, POST, PUT, and DELETE operations.
+- **/product**: Endpoint for managing products. Supports GET, POST, PUT, and DELETE operations.
 
-Método: POST
-URI: /animal
-Corpo da Solicitação: Aceita um objeto do tipo AnimalRequestDTO contendo detalhes do novo animal.
-Resposta: Retorna o identificador único gerado (UUID) do animal criado.
-3. Atualizar um animal existente:
+## Database Schema
+The application uses three main entities: `AnimalEntity`, `CustomerServiceEntity`, and `ProductEntity`.
 
-Método: PUT
-URI: /animal/{id} (onde {id} é o UUID do animal a ser atualizado)
-Corpo da Solicitação: Aceita um objeto do tipo AnimalRequestDTO contendo as informações atualizadas para o animal.
-Resposta: Nenhum conteúdo de resposta é retornado, mas um código de status indica sucesso (200 OK) ou falha.
-4. Excluir um animal:
+- **AnimalEntity**: Represents the pets in the system. Each pet has a unique ID, name, date of birth, species, and a `RegistrationEntity`.
+- **CustomerServiceEntity**: Represents the customer services in the system. Each service has a unique ID, type, status, description, date and time realized, a boolean indicating whether it's an emergency, a `RegistrationEntity`, a `ProductEntity`, an `AnimalEntity`, and a value.
+- **ProductEntity**: Represents the products in the system. Each product has a unique ID, name, description, price, and a `RegistrationEntity`.
 
-Método: DELETE
-URI: /animal/{id} (onde {id} é o UUID do animal a ser excluído)
-Resposta: Nenhum conteúdo de resposta é retornado, mas um código de status indica sucesso (200 OK) ou falha.
-Observações Adicionais
-Esta API utiliza JPA para persistência de dados e Lombok para redução de código repetitivo.
-Spring Boot é o framework utilizado para construir esta API.
+## Contributing
+Contributions are welcome. Please fork the project and create a Pull Request. Make sure your changes pass all tests before submitting the Pull Request.
 
-Documentação da API Petland - Serviços para Clientes
-Este documento descreve as funcionalidades da API Petland para Serviços ao Cliente.
-
-A API fornece funcionalidades para gerenciar serviços prestados a clientes, incluindo:
-
-Criar novos registros de serviços para clientes.
-Obter uma lista de todos os serviços prestados a clientes.
-Atualizar informações de serviços existentes.
-Excluir registros de serviços.
-Modelo de Dados
-A entidade de dados principal que representa um serviço ao cliente é CustomerServiceEntity. Possui as seguintes propriedades:
-
-id: Identificador único (UUID) do serviço ao cliente (gerado automaticamente).
-type: Tipo de serviço realizado (Enum: CONSULTA, VACINA, CHECKUP, BANHO).
-status: Situação do serviço (Enum: AGENDADO, EM ANDAMENTO, FINALIZADO, CANCELADO).
-description: Descrição do serviço realizado.
-dateRealized: Data de realização do serviço (LocalDate).
-timeRealized: Hora de realização do serviço (LocalDate).
-emergency: Indica se o serviço foi de emergência (boolean).
-registrationEntity: Entidade relacionada ao registro do cliente (relacionamento Muitos-para-Um).
-serviceEntity: Entidade relacionada ao produto utilizado no serviço (relacionamento Muitos-para-Um).
-patientEntity: Entidade relacionada ao animal atendido (relacionamento Muitos-para-Um).
-value: Valor total do serviço prestado.
-Endpoints
-1. Listar todos os serviços ao cliente:
-
-Método: GET
-URI: /product-service (embora o nome do endpoint sugira serviços de produtos, ele trata de serviços ao cliente)
-Resposta: Retorna uma lista de objetos CustomerServiceResponseDTO contendo detalhes de todos os serviços prestados a clientes registrados.
-2. Criar um novo serviço ao cliente:
-
-Método: POST
-URI: /product-service
-Corpo da Solicitação: Aceita um objeto do tipo CustomerServiceRequireDTO contendo detalhes do novo serviço ao cliente.
-Resposta: Retorna o identificador único gerado (UUID) do serviço criado.
-3. Atualizar um serviço ao cliente existente:
-
-Método: PUT
-URI: /product-service/{id} (onde {id} é o UUID do serviço a ser atualizado)
-Corpo da Solicitação: Aceita um objeto do tipo CustomerServiceRequireDTO contendo as informações atualizadas para o serviço.
-Resposta: Nenhum conteúdo de resposta é retornado, mas um código de status indica sucesso (200 OK) ou falha.
-4. Excluir um serviço ao cliente:
-
-Método: DELETE
-URI: /product-service/{id} (onde {id} é o UUID do serviço a ser excluído)
-Resposta: Nenhum conteúdo de resposta é retornado, mas um código de status indica sucesso (200 OK) ou falha.
-
-Observações Adicionais
-Esta API utiliza JPA para persistência de dados e Lombok para redução de código repetitivo.
-Spring Boot é o framework utilizado para construir esta API.
-
+## License
+This project is licensed under the MIT license. This means you can copy, modify, distribute, and even sell the software, as long as you include the original license in any copies of the software you distribute.
