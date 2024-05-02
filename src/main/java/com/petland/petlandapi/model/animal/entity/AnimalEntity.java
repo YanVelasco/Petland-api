@@ -1,5 +1,6 @@
 package com.petland.petlandapi.model.animal.entity;
 
+import com.petland.petlandapi.model.register.entity.RegistrationEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -25,4 +26,6 @@ public class AnimalEntity {
     @Enumerated(EnumType.STRING)
     private Specie specie;
 
+    @Column(name = "registration_id")
+    private UUID registrationId;
 }
