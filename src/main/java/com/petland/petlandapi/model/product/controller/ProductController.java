@@ -1,34 +1,52 @@
 package com.petland.petlandapi.model.product.controller;
 
-import com.petland.petlandapi.model.product.entity.ProductEntity;
-import com.petland.petlandapi.model.product.repository.ProductRepository;
+import com.petland.petlandapi.model.product.dto.ProductRequestDTO;
+
+import com.petland.petlandapi.model.product.dto.ProductResponseDTO;
+import com.petland.petlandapi.model.product.usecases.CreateProductUseCase;
+import com.petland.petlandapi.model.product.usecases.DeleteProductByIdUseCase;
+import com.petland.petlandapi.model.product.usecases.ListAllProductsUseCase;
+import com.petland.petlandapi.model.product.usecases.UpdateProductByIdUseCase;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
 @RequestMapping("/products")
 public class ProductController {
 
-    private final ProductRepository productRepository;
+    private final CreateProductUseCase createProductUseCase;
+    private final UpdateProductByIdUseCase updateProductByIdUseCase;
+    private final DeleteProductByIdUseCase deleteProductByIdUseCase;
+    private final ListAllProductsUseCase listAllProductsUseCase;
 
-    public ProductController(ProductRepository productRepository) {
-        this.productRepository = productRepository;
+
+    public ProductController(DeleteProductByIdUseCase deleteProductByIdUseCase, CreateProductUseCase createProductUseCase, UpdateProductByIdUseCase
+            updateProductByIdUseCase, ListAllProductsUseCase listAllProductsUseCase) {
+        this.deleteProductByIdUseCase = deleteProductByIdUseCase;
+        this.createProductUseCase = createProductUseCase;
+        this.updateProductByIdUseCase = updateProductByIdUseCase;
+        this.listAllProductsUseCase = listAllProductsUseCase;
     }
 
     @PostMapping
-    public ProductEntity createProduct(@RequestBody ProductEntity productEntity) {
-        return productRepository.save (productEntity);
+    public UUID createProduct(@RequestBody ProductRequestDTO productRequestDTO) {
+        return createProductUseCase.execute(productRequestDTO);
     }
 
     @PutMapping("/{uuid}")
-    public ProductEntity updateProduct(@RequestBody ProductEntity productEntity, @PathVariable UUID uuid) {
-        return productRepository.save (productEntity);
+    public UUID updateProduct( @PathVariable UUID uuid ,@RequestBody ProductRequestDTO productRequestDTO) {
+        return updateProductByIdUseCase.execute(uuid, productRequestDTO);
     }
 
     @DeleteMapping("/{uuid}")
     public void deleteProduct(@PathVariable UUID uuid) {
-        productRepository.deleteById(uuid);
+        deleteProductByIdUseCase.execute(uuid);
     }
 
+    @GetMapping
+    public List<ProductResponseDTO> listAllProducts() {
+        return listAllProductsUseCase.execute();
+    }
 }
