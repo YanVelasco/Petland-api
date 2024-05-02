@@ -1,6 +1,6 @@
 package com.petland.petlandapi.model.customerservice.usecases;
 
-import com.petland.petlandapi.model.customerservice.dto.CustomerServiceRequireDTO;
+import com.petland.petlandapi.model.customerservice.controller.dto.CustomerServiceRequireDTO;
 import com.petland.petlandapi.model.customerservice.repository.CustomerServiceRepository;
 import org.springframework.stereotype.Service;
 

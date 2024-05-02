@@ -6,6 +6,9 @@ import com.petland.petlandapi.model.animal.usecases.AlterAnimalByIdUseCase;
 import com.petland.petlandapi.model.animal.usecases.CreateAnimalUseCase;
 import com.petland.petlandapi.model.animal.usecases.DeleteAnimalByIdUseCase;
 import com.petland.petlandapi.model.animal.usecases.ListAllAnimalsUseCase;
+
+import io.swagger.v3.oas.annotations.Operation;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -30,26 +33,31 @@ public class AnimalController {
         this.deleteAnimalByIdUseCase = deleteAnimalByIdUseCase;
     }
 
-
+    @Operation(summary = "Get all animals")
     @GetMapping
-    public List<AnimalResponseDTO> getAllAnimals() {
-        return listAllAnimalsUseCase.execute ();
+    public ResponseEntity<List<AnimalResponseDTO>> getAllAnimals() {
+        List<AnimalResponseDTO> animals = listAllAnimalsUseCase.execute();
+        return ResponseEntity.ok(animals);
     }
 
+    @Operation(summary = "Create a new animal")
     @PostMapping
-    public UUID createAnimal(@RequestBody AnimalRequestDTO animalRequestDTO) {
-        return createAnimalUseCase.execute (animalRequestDTO);
+    public ResponseEntity<UUID> createAnimal(@RequestBody AnimalRequestDTO animalRequestDTO) {
+        UUID id = createAnimalUseCase.execute(animalRequestDTO);
+        return ResponseEntity.ok(id);
     }
 
+    @Operation(summary = "Update an existing animal")
     @PutMapping("/{id}")
-    public UUID updateAnimal(@PathVariable("id") UUID id, @RequestBody AnimalRequestDTO animalRequestDTO) {
-        alterAnimalByIdUseCase.execute (id, animalRequestDTO);
-        return id;
+    public ResponseEntity<UUID> updateAnimal(@PathVariable UUID id, @RequestBody AnimalRequestDTO animalRequestDTO) {
+        alterAnimalByIdUseCase.execute(id, animalRequestDTO);
+        return ResponseEntity.ok(id);
     }
 
+    @Operation(summary = "Delete an animal")
     @DeleteMapping("/{id}")
-    public void deleteAnimal(@PathVariable("id") UUID id) {
-        deleteAnimalByIdUseCase.execute (id);
+    public ResponseEntity<Void> deleteAnimal(@PathVariable UUID id) {
+        deleteAnimalByIdUseCase.execute(id);
+        return ResponseEntity.noContent().build();
     }
-
 }

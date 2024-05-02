@@ -1,11 +1,14 @@
 package com.petland.petlandapi.model.customerservice.controller;
 
-import com.petland.petlandapi.model.customerservice.dto.CustomerServiceRequireDTO;
-import com.petland.petlandapi.model.customerservice.dto.CustomerServiceResponseDTO;
+import com.petland.petlandapi.model.customerservice.controller.dto.CustomerServiceRequireDTO;
+import com.petland.petlandapi.model.customerservice.controller.dto.CustomerServiceResponseDTO;
 import com.petland.petlandapi.model.customerservice.usecases.CreateCustomerServiceUseCase;
 import com.petland.petlandapi.model.customerservice.usecases.DeleteCustomerServiceByIdUseCase;
 import com.petland.petlandapi.model.customerservice.usecases.ListAllCustomerServiceUseCase;
 import com.petland.petlandapi.model.customerservice.usecases.UpdateCustomerServiceUseCase;
+
+import io.swagger.v3.oas.annotations.Operation;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,23 +29,31 @@ public class ProductServiceController {
         this.deleteCustomerServiceUseCase = deleteCustomerServiceUseCase;
     }
 
+    @Operation(summary = "Create a new customer service")
     @PostMapping
-    public UUID createCustomerService(@RequestBody CustomerServiceRequireDTO customerServiceRequireDTO) {
-        return createCustomerServiceUseCase.execute(customerServiceRequireDTO);
+    public ResponseEntity<UUID> createCustomerService(@RequestBody CustomerServiceRequireDTO customerServiceRequireDTO) {
+        UUID id = createCustomerServiceUseCase.execute(customerServiceRequireDTO);
+        return ResponseEntity.ok(id);
     }
 
+    @Operation(summary = "View a list of all customer services")
     @GetMapping
-    public List<CustomerServiceResponseDTO> listAllCustomerService() {
-        return listAllCustomerServiceUseCase.execute();
+    public ResponseEntity<List<CustomerServiceResponseDTO>> listAllCustomerService() {
+        List<CustomerServiceResponseDTO> services = listAllCustomerServiceUseCase.execute();
+        return ResponseEntity.ok(services);
     }
 
+    @Operation(summary = "Update an existing customer service")
     @PutMapping("/{id}")
-    public void updateCustomerService(@PathVariable UUID id, @RequestBody CustomerServiceRequireDTO customerServiceRequireDTO) {
+    public ResponseEntity<UUID> updateCustomerService(@PathVariable UUID id, @RequestBody CustomerServiceRequireDTO customerServiceRequireDTO) {
         updateCustomerServiceUseCase.execute(id, customerServiceRequireDTO);
+        return ResponseEntity.ok(id);
     }
 
+    @Operation(summary = "Delete a customer service")
     @DeleteMapping("/{id}")
-    public void deleteCustomerService(@PathVariable UUID id) {
+    public ResponseEntity<Void> deleteCustomerService(@PathVariable UUID id) {
         deleteCustomerServiceUseCase.execute(id);
+        return ResponseEntity.noContent().build();
     }
 }

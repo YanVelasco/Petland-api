@@ -6,6 +6,9 @@ import com.petland.petlandapi.model.register.usecases.AlterRegistersByIdUseCase;
 import com.petland.petlandapi.model.register.usecases.CreateRegistrationUseCase;
 import com.petland.petlandapi.model.register.usecases.DeleteRegistrationIdUseCase;
 import com.petland.petlandapi.model.register.usecases.ListAllRegistrationsUseCase;
+
+import io.swagger.v3.oas.annotations.Operation;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,24 +30,31 @@ public class RegistrationController {
         this.deleteRegistrationIdUseCase = deleteRegistrationIdUseCase;
     }
 
+    @Operation(summary = "Create a new registration")
     @PostMapping
-    public UUID create(@RequestBody RegistrationRequestDTO registrationRequestDTO) {
-        return  createRegistrationUseCase.execute( registrationRequestDTO);
+    public ResponseEntity<UUID> create(@RequestBody RegistrationRequestDTO registrationRequestDTO) {
+        UUID id = createRegistrationUseCase.execute(registrationRequestDTO);
+        return ResponseEntity.ok(id);
     }
 
+    @Operation(summary = "List all registrations")
     @GetMapping
-    public List<RegistrationResponseDTO> listAll() {
-        return listAllRegistrationsUseCase.execute();
+    public ResponseEntity<List<RegistrationResponseDTO>> listAll() {
+        List<RegistrationResponseDTO> registrations = listAllRegistrationsUseCase.execute();
+        return ResponseEntity.ok(registrations);
     }
 
+    @Operation(summary = "Update an existing registration")
     @PutMapping("/{id}")
-    public UUID update(@PathVariable("id") UUID id, @RequestBody RegistrationRequestDTO registrationRequestDTO) {
-        return alterRegistersByIdUseCase.execute(id, registrationRequestDTO);
+    public ResponseEntity<UUID> update(@PathVariable UUID id, @RequestBody RegistrationRequestDTO registrationRequestDTO) {
+        UUID updatedId = alterRegistersByIdUseCase.execute(id, registrationRequestDTO);
+        return ResponseEntity.ok(updatedId);
     }
 
+    @Operation(summary = "Delete a registration")
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable("id") UUID id) {
+    public ResponseEntity<Void> delete(@PathVariable UUID id) {
         deleteRegistrationIdUseCase.execute(id);
+        return ResponseEntity.noContent().build();
     }
-
 }
