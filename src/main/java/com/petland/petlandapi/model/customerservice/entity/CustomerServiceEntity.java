@@ -34,14 +34,14 @@ public class CustomerServiceEntity {
     private LocalDate timeRealized;
     private boolean emergency;
 
-    @ManyToOne
-    private RegistrationEntity registrationEntity;
+    @Column(name = "registration_id")
+    private UUID registrationId;
 
-    @ManyToOne
-    private ProductEntity serviceEntity;
+    @Column(name = "product_id")
+    private UUID productId;
 
-    @ManyToOne
-    private AnimalEntity patientEntity;
+    @Column(name = "animal_id")
+    private UUID animalId;
 
     private double value;
 

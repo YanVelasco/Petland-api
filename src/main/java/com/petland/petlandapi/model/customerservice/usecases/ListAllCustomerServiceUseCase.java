@@ -26,9 +26,9 @@ public class ListAllCustomerServiceUseCase {
                 customerServiceEntity.getDateRealized(),
                 customerServiceEntity.getTimeRealized(),
                 customerServiceEntity.isEmergency(),
-                customerServiceEntity.getRegistrationEntity(),
-                customerServiceEntity.getServiceEntity(),
-                customerServiceEntity.getPatientEntity(),
+                customerServiceEntity.getRegistrationId (),
+                customerServiceEntity.getProductId(),
+                customerServiceEntity.getAnimalId(),
                 customerServiceEntity.getValue()
         ));
     }

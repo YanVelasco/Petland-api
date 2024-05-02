@@ -26,7 +26,8 @@ public class ListAllAnimalsUseCase {
                     animalEntity.getId (),
                     animalEntity.getName (),
                     animalEntity.getBornDate (),
-                    animalEntity.getSpecie ()
+                    animalEntity.getSpecie(),
+                    animalEntity.getRegistrationId()
             );
             BeanUtils.copyProperties (animalEntity, animalResponseDTO);
             animalResponseDTOs.add (animalResponseDTO);

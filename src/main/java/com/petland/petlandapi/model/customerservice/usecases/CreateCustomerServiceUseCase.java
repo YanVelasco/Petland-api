@@ -26,13 +26,13 @@ public class CreateCustomerServiceUseCase {
     }
 
     public UUID execute(CustomerServiceRequireDTO customerServiceRequireDTO) {
-        registrationRepository.findById (customerServiceRequireDTO.registrationEntity ().getId ())
+        registrationRepository.findById (customerServiceRequireDTO.registrationId ())
                 .orElseThrow (() -> new RuntimeException ("Registration not found"));
 
-        productRepository.findById (customerServiceRequireDTO.serviceEntity ().getId ())
+        productRepository.findById (customerServiceRequireDTO.productId ())
                 .orElseThrow (() -> new RuntimeException ("Product not found"));
 
-        animalRepository.findById (customerServiceRequireDTO.patientEntity ().getId ())
+        animalRepository.findById (customerServiceRequireDTO.animalId ())
                 .orElseThrow (() -> new RuntimeException ("Animal not found"));
 
         CustomerServiceEntity entity = new CustomerServiceEntity ();
