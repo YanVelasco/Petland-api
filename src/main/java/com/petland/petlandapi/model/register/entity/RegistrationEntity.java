@@ -1,6 +1,5 @@
 package com.petland.petlandapi.model.register.entity;
 
-import com.petland.petlandapi.model.register.Address;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import lombok.*;

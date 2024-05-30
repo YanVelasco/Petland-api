@@ -1,4 +1,4 @@
-package com.petland.petlandapi.model.register;
+package com.petland.petlandapi.model.register.entity;
 
 import jakarta.persistence.Embeddable;
 import lombok.AllArgsConstructor;

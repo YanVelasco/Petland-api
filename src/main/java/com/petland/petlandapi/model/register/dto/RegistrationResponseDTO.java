@@ -1,6 +1,6 @@
 package com.petland.petlandapi.model.register.dto;
 
-import com.petland.petlandapi.model.register.Address;
+import com.petland.petlandapi.model.register.entity.Address;
 import com.petland.petlandapi.model.register.entity.Profile;
 import io.swagger.v3.oas.annotations.media.Schema;
 
